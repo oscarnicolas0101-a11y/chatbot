@@ -1,0 +1,27 @@
+name: Analisis Frecuencia Punto X
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+jobs:
+  calibracion:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del Repositorio
+        uses: actions/checkout@v4
+
+      - name: Inicializar Punto Cero CIP 1.0000
+        run: |
+          echo "Fecha del Evento: 2026-02-08 19:37"
+          echo "Estado: Calibrando desde Punto Cero CIP 1.0000"
+          echo "Objetivo: Transformar caos en estructura logica"
+
+      - name: Ejecutar Investigacion
+        run: |
+          if [ -f "investigacion.py" ]; then
+            python investigacion.py
+          else
+            echo "Error: investigacion.py no encontrado en la raiz."
+            exit 1
+          fi
