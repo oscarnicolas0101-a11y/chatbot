@@ -1,26 +1,15 @@
 name: Analisis Punto X
 on:
-  push:
-    branches: [ main ]
   workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
-  run-logic:
+  configuracion:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.10'
-      - name: Dependencies
-        run: pip install requests
-      - name: Execution
-        env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: python investigacion.py
-      - name: Persistence
-        uses: upload-artifact@v4
-        with:
-          name: reporte-frecuencia
-          path: analisis_dimensional.md
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Validar Punto Cero CIP 1.0000
+        run: echo "Iniciando calibracion desde el Punto X"
