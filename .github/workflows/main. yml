@@ -5,23 +5,21 @@ on:
     branches: [ main ]
 
 jobs:
-  calibracion:
+  ejecucion-nodo:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout del Repositorio
         uses: actions/checkout@v4
 
-      - name: Inicializar Punto Cero CIP 1.0000
-        run: |
-          echo "Fecha del Evento: 2026-02-08 19:37"
-          echo "Estado: Calibrando desde Punto Cero CIP 1.0000"
-          echo "Objetivo: Transformar caos en estructura logica"
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
 
-      - name: Ejecutar Investigacion
+      - name: Instalar Dependencias
         run: |
-          if [ -f "investigacion.py" ]; then
-            python investigacion.py
-          else
-            echo "Error: investigacion.py no encontrado en la raiz."
-            exit 1
-          fi
+          pip install crewai
+
+      - name: Ejecutar Nodo Soberano
+        run: |
+          python investigacion.py
